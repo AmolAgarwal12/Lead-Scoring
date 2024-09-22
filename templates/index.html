@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-image: url("images4.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.8;
+
+    }
+
+    .split {
+      height: 100%;
+      width: 50%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      overflow-x: hidden;
+
+
+    }
+
+    .left {
+      left: 0;
+      width: 50%;
+
+    }
+
+    .right {
+      margin-left: 400px;
+
+    }
+
+    .right::-webkit-scrollbar {
+      display: none;
+    }
+
+    .heading {
+      color: rgb(228, 229, 230);
+      right: 0;
+      font-size: 70px;
+      padding-top: 35%;
+      margin-left: 10%;
+      margin-right: 30%;
+
+
+    }
+
+    .lefthead {
+      text-align: center;
+    }
+
+    form {
+      padding: 2em 0;
+    }
+
+    .field {
+      display: flex;
+      flex-flow: column-reverse;
+      margin-bottom: 0.5em;
+    }
+
+    label,
+    input {
+      transition: all 0.2s;
+      touch-action: manipulation;
+    }
+
+    select {
+      font-size: 1rem;
+      border: 1px solid rgb(95, 93, 93);
+      font-family: inherit;
+      -webkit-appearance: none;
+      border-radius: 0.45rem;
+      padding: 5px;
+      cursor: text;
+    }
+
+    select:focus {
+      outline: 0;
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    label {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    select:placeholder-shown+label {
+      cursor: text;
+      padding-left: 5px;
+      max-width: 66.66%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transform-origin: left bottom;
+      transform: translate(0, 2.25rem) scale(0.6);
+
+    }
+
+    ::-webkit-input-placeholder {
+      opacity: 0;
+      transition: inherit;
+    }
+
+    select:focus::-webkit-input-placeholder {
+      opacity: 1;
+    }
+
+    select:not(:placeholder-shown)+label,
+    select:focus+label {
+      transform: translate(0, 0) scale(1);
+      cursor: pointer;
+    }
+
+    .formalign {
+      padding-left: 100px;
+      padding-right: 100px;
+      background-color: rgb(177, 196, 204);
+    }
+
+    button {
+      background-color: rgb(41, 48, 57);
+      color: honeydew;
+      align-content: center;
+      margin-top: 20px;
+      width: 150px;
+      border-radius: 5px;
+
+    }
+
+
+
+    .top {
+      background-color: rgb(100, 166, 199);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="split left flip-card-front">
+    <h1 class="heading">
+      Predictive Sales AI
+    </h1>
+  </div>
+
+  <div class="split right ">
+    <div>
+      <h1 class="lefthead top">
+        Predict Lead Scores
+      </h1>
+    </div>
+
+    <form class="formalign" action="{{ url_for('predict') }}" method="post">
+      <label for="Do Not Email">Do Not Email</label>
+      <div class="field">
+        <select name="DoNotEmail" id="DoNotEmail" required="required">
+          <option value=0>No</option>
+          <option value=1>Yes</option>
+        </select>
+      </div>
+
+      <label for="leadOrigin">Lead Origin</label>
+      <div class="field">
+        <select name="leadOrigin" id="leadOrigin" aria-placeholder="Lead Origin_Lead Add Form" required="required">
+          <option value=0>Landing Page Submission</option>
+          <option value=1>Lead Add Form</option>
+          <option value=2>Lead Import</option>
+          <option value=3>API</option>
+        </select>
+      </div>
+
+      <label for="Lead Source">Lead Source</label>
+      <div class="field">
+        <select name="leadSource" id="leadSource" placeholder="Lead Source_Welingak Website" required="required">
+          <option value=0>Google</option>
+          <option value=1>Direct Traffic</option>
+          <option value=2>Olark Chat</option>
+          <option value=3>Organic Search</option>
+          <option value=4>Welingak Website</option>
+          <option value=5>Referral Sites</option>
+          <option value=6>Reference</option>
+          <option value=7>Facebook</option>
+          <option value=8>Others</option>
+        </select>
+      </div>
+
+      <label for="Last Activity">Last Activity</label>
+      <div class="field">
+        <select name="lastActivity" id="lastActivity" placeholder="Last Activity_SMS Sent" required="required">
+          <option value=0>Email Opened</option>
+          <option value=1>SMS Sent</option>
+          <option value=2>Olark Chat Conversation</option>
+          <option value=3>Page Visited on Website</option>
+          <option value=4>Converted to Lead</option>
+          <option value=5>Email Bounced</option>
+          <option value=6>Email Link Clicked</option>
+          <option value=7>Form Submitted on Website</option>
+          <option value=8>Unreachable</option>
+          <option value=9>Unsubscribed</option>
+          <option value=10>Had a Phone Conversation</option>
+        </select>
+      </div>
+
+      <label for="Specialization">Specialization</label>
+      <div class="field">
+        <select name="specialization" id="specialization" placeholder="Specialization" required="required">
+          <option value=0>Others</option>
+          <option value=1>Finance Management</option>
+          <option value=2>Human Resource Management</option>
+          <option value=3>Marketing Management</option>
+          <option value=4>Operations Management</option>
+          <option value=5>Business Administration</option>
+          <option value=6>IT Projects Management</option>
+          <option value=7>Supply Chain Management</option>
+          <option value=8>Banking Investment And Insurance</option>
+          <option value=9>Travel and Tourism </option>
+          <option value=10>Media and Advertising</option>
+          <option value=11>International Business</option>
+          <option value=12>Healthcare Management</option>
+          <option value=13>Hospitality Management</option>
+          <option value=14>E-COMMERCE</option>
+          <option value=15>Retail Management</option>
+          <option value=16>Rural and Agribusiness</option>
+          <option value=17>E-Business</option>
+          <option value=18>Services Excellence</option>
+        </select>
+      </div>
+
+      <label for="Current occupation">Current occupation</label>
+      <div class="field">
+        <select name="currentoccupation" id="currentoccupation" placeholder="Current Occupation" required="required">
+          <option value=0>HouseWife</option>
+          <option value=1>Unemployed</option>
+          <option value=2>Working Professional</option>
+          <option value=3>Student</option>
+          <option value=4>Other</option>
+          <option value=5>Businessman</option>
+        </select>
+      </div>
+
+      <label for="Tags">Tags</label>
+      <div class="field">
+        <select name="tags" id="tags" placeholder="Tags" required="required">
+          <option value=0>Busy</option>
+          <option value=1>Closed by Horizzon</option>
+          <option value=2>Interested in full time MBA</option>
+          <option value=3>Interested in other courses</option>
+          <option value=4>Lost to EINS</option>
+          <option value=5>Not doing further education</option>
+          <option value=6>Others_Tags</option>
+          <option value=7>Ringing</option>
+          <option value=8>Will revert after reading the email</option>
+          <option value=9>Invalid Number</option>
+          <option value=10>Switched off</option>
+          <option value=11>Worng Number Given</option>
+          <option value=12>Oop Hangup</option>
+        </select>
+      </div>
+
+      <label for="leadquality">Lead Quality</label>
+      <div class="field">
+        <select name="leadQuality" id="leadOrigin" required="required">
+          <option value=0>Not Sure</option>
+          <option value=1>Might be</option>
+          <option value=2>High in Relevance</option>
+          <option value=3>Worst</option>
+          <option value=4>Low in Relevance</option>
+        </select>
+      </div>
+
+      <label for="City">City</label>
+      <div class="field">
+        <select name="city" id="city" required="required">
+          <option value=0>Mumbai</option>
+          <option value=1>Thane & Outstirks</option>
+          <option value=2>Other Cities of Maharashtra</option>
+          <option value=3>Other Metro Cities</option>
+          <option value=4>Other Cities</option>
+          <option value=5>Tier II Cities</option>
+        </select>
+      </div>
+
+      <label for="Last Notable Activity">Last Notable Activity</label>
+      <div class="field">
+        <select name="lastnotableactivity" id="lastnotableactivity" required="required">
+          <option value=0>Email Opened</option>
+          <option value=1>SMS Sent</option>
+          <option value=2>Olark Chat Conversation</option>
+          <option value=3>Modified</option>
+          <option value=4>Page Visited on Website</option>
+          <option value=5>Had a Phone Conversation</option>
+          <option value=6>Email Link Clicked</option>
+          <option value=7>Email Bounced</option>
+          <option value=8>Unsubscribed</option>
+          <option value=9>Approcahed upfront</option>
+          <option value=10>Resubscribed to email</option>
+          <option value=11>View in browser link Clicked</option>
+          <option value=12>Email Received</option>
+          <option value=13>From Submitted on Website</option>
+          <option value=14>Unreachable</option>
+          <option value=15>Email Marked Spam</option>
+        </select>
+
+      </div>
+
+      <div class="field">
+        <input type="number" name="TotalVisits" id="TotalVists" placeholder="TotalVists" required="required">
+        <label for="Total Visits">Total Vists</label>
+      </div>
+
+      <div class="field">
+        <input type="number" name="Total Time Spent on Website" id="Total Time Spent on Website"
+          placeholder="Lead Quality_Worst" required="required">
+        <label for="Total Time Spent on Website">Total Time Spent on Website</label>
+      </div>
+
+      <div class="field">
+        <input type="number" name="Page Views Per Visit" id="Page Views Per Visit" placeholder="Page Views Per Visit"
+          required="required">
+        <label for="Page Views Per Visit">Page Views Per Visit</label>
+      </div>
+
+      <div class="lefthead">
+        <button type="submit">SUBMIT</button>
+      </div>
+
+    </form>
+    <br>
+    <br>
+    <h4>{{ prediction_text}}</h4>
+  </div>
+</body>
+
+</html>
